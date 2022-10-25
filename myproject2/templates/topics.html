@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ board.name }} - {{ block.super }}
+    <!--   与homt.html相比,改变了  title  的默认值 -->
+{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+    <li class="breadcrumb-item active">{{ board.name }}</li>
+{% endblock %}
+
+{% block content %}
+    <!-- 现在就让它空着吧。我将在这里添加core。 -->
+<div class="mb-4">
+<!--    创建一个转到 new_topic的按钮-->
+    <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>
+</div>
+
+<table class="table">
+    <thead class="thead-inverse">
+        <tr>
+            <th>Topic</th>
+            <th>Starter</th>
+            <th>Replies</th>
+            <th>Views</th>
+            <th>Last Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for topic in topics %}
+<!--   board.topics.all是一个Related Manager,通常在board.objects可得到，返回给定 board 的所有 topic
+        如果要过滤⼀些数据，比如Hello，可以⽤board.topics.filter(subject__contains='Hello')-->
+            <tr>
+                <td>
+                    <a href="{% url 'topic_posts' board.pk topic.pk %}">{ { topic.subject }}</a>
+                </td>
+                <td>{{ topic.starter.username }}</td>
+                <!--  上一行在使⽤  ForeignKey;语法举例: 如果想得到⽤户的 email，可以使⽤  topic.starter.email             -->
+                <td>{{  topic.starter.username }}</td>
+                <td>0</td>
+                <td>{{ topic.last_updated }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

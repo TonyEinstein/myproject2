@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Start a New Topic{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
+    <li class="breadcrumb-item active">New topic</li>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+<!--   这个 form有三个渲染选项： form.as_table  ， form.as_ul  和form.as_p  。
+这是⼀个快速的渲染表单所有字段的⽅法。顾名思义， as_table  使⽤ table 标签来格式化输⼊， as_ul  使⽤ li 标签。-->
+        <button type="submit" class="btn btn-success">Post</button>
+    </form>
+{% endblock %}

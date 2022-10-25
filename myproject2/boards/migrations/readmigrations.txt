@@ -1,0 +1,16 @@
+
+migrations/：在这个⽂件夹⾥，Django会存储⼀些⽂件以跟踪你在models.py⽂件中创建的变更，
+                       ⽤来保持数据库和models.py的同步。
+
+1.创建文件0001_initial.py：【该文件是告诉django创建数据库】
+    python manage.py makemigrations
+    该文件代表了应⽤程序模型的当前状态。
+
+    迁移⽂件将被翻译成SQL语句。
+    如果您熟悉SQL，则可以运⾏以下命令来检验将是要被数据库执⾏的SQL指令:
+            python manage.py sqlmigrate boards 0001
+
+2.将⽣成的迁移⽂件应⽤到数据库：
+    python manage.py migrate   # 创建表结构
+
+
